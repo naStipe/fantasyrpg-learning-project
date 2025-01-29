@@ -139,7 +139,9 @@ namespace fantasyrpg_learning_project
             GameController controller = new GameController(conan, slime);
 
             Console.WriteLine("Press 'A' to Attack, 'D' to Defend, 'H' to Heal, 'M' to Move, 'S' to change state. Press 'Q' to quit.");
-
+            
+            DatabaseManager databaseManager = new DatabaseManager();
+            databaseManager.ConnectToPostgres();
             
             // Example how to define custom key mappings
             /*
