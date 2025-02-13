@@ -141,7 +141,8 @@ namespace fantasyrpg_learning_project
             Console.WriteLine("Press 'A' to Attack, 'D' to Defend, 'H' to Heal, 'M' to Move, 'S' to change state. Press 'Q' to quit.");
             
             DatabaseManager databaseManager = new DatabaseManager();
-            databaseManager.ConnectToPostgres();
+            
+            databaseManager.SaveItems(new List<Item>{commonWeapon, commonArmor, commonPotion});
             
             // Example how to define custom key mappings
             /*

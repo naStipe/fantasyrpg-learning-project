@@ -24,9 +24,14 @@ namespace fantasyrpg_learning_project.ItemCreator.Models
 
     public class Weapon : Item
     {
-        private WeaponTypeEnum WeaponType { get; set; }
+        public WeaponTypeEnum WeaponType { get; set; }
 
         public Weapon(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value) : base(name, description, rarity) { 
+            WeaponType = type;
+            Value = value;
+            ItemType = ItemTypeEnum.Weapon;
+        }
+        public Weapon(int id, string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value) : base(name, description, rarity) { 
             WeaponType = type;
             Value = value;
             ItemType = ItemTypeEnum.Weapon;

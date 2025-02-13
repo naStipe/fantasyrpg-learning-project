@@ -7,6 +7,41 @@ namespace fantasyrpg_learning_project.ItemCreator
         public abstract Weapon CreateWeapon();
         public abstract UtilityItem CreateUtilityItem();
         public abstract DefensiveItem CreateDefensiveItem();
+        
+    }
+
+    public class ItemFromDatabaseFactory : ItemFacotry
+    {
+
+        public Weapon CreateWeaponFromDatabase(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value)
+        {
+            return new Weapon(name, description, rarity, type, value);
+        }
+
+        public UtilityItem CreateUtilityItemFromDatabase(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value)
+        {
+            return new UtilityItem("Healing potion", "Basic healing potion", RarityEnum.Common, 20);
+        }
+
+        public DefensiveItem CreateDefensiveItemFromDatabase(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value)
+        {
+            return new DefensiveItem("Body armor", "Leather armor", RarityEnum.Common, 50);
+        }
+
+        public override Weapon CreateWeapon()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override UtilityItem CreateUtilityItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DefensiveItem CreateDefensiveItem()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class CommonItemFactory : ItemFacotry
