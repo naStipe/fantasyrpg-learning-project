@@ -21,6 +21,11 @@ namespace fantasyrpg_learning_project.GameWorldCreator.Models
             TimeOfDay = WorldTimeEnum.Morning; // Default value
         }
 
+        public List<Character> GetCharacters()
+        {
+            return WorldCharacters;
+        }
+
         // Public static method to access the single instance
         public static GameWorld Instance
         {

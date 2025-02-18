@@ -14,6 +14,11 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
         {
             Console.WriteLine($"Enemy: {Name}, Health: {Health}, Agility: {Agility}, Strength: {Strength}, Rank: {Rank}");
         }
+
+        public override string GetClassName()
+        {
+            return "Enemy";
+        }
     }
 
 

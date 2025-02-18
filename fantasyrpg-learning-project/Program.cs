@@ -12,6 +12,9 @@ namespace fantasyrpg_learning_project
     {
         static void Main(string[] args)
         {
+            
+            DatabaseManager databaseManager = new DatabaseManager();
+            List<Item> items = databaseManager.LoadItems().ToList();
             // Initialize the game world instace
             var gameWorld = GameWorld.Instance;
 
@@ -27,24 +30,27 @@ namespace fantasyrpg_learning_project
 
             // Generate the world map
             gameWorld.InitializeWorld(10, 10, biomes);
+            databaseManager.LoadCharacters();
+            if (gameWorld.WorldCharacters.Count == 0)
+            {
+                // Create characters using the factory pattern
+                CharacterFactory warriorFactory = new WarriorFactory();
+                CharacterFactory mageFactory = new MageFactory();
+                CharacterFactory archerFactory = new ArcherFactory();
 
-            // Create characters using the factory pattern
-            CharacterFactory warriorFactory = new WarriorFactory();
-            CharacterFactory mageFactory = new MageFactory();
-            CharacterFactory archerFactory = new ArcherFactory();
-
-            // Display character information
-            gameWorld.AddCharacter(warriorFactory.CreateCharacter("Conan"));
-            gameWorld.AddCharacter(mageFactory.CreateCharacter("Merlin"));
-            gameWorld.AddCharacter(archerFactory.CreateCharacter("Legolas"));
-
+                // Display character information
+                gameWorld.AddCharacter(warriorFactory.CreateCharacter("Conan"));
+                gameWorld.AddCharacter(mageFactory.CreateCharacter("Merlin"));
+                gameWorld.AddCharacter(archerFactory.CreateCharacter("Legolas"));
+            }
+            
             // Add NPCs to the game world
             // TODO: Extend NPC class -> Jobs, Skills, Inventory, Roles
             NpcFactory npcFactory = new NpcFactory();
 
-            gameWorld.AddCharacter(npcFactory.CreateCharacter("Villager"));
-            gameWorld.AddCharacter(npcFactory.CreateCharacter("Villager"));
-
+            // gameWorld.AddCharacter(npcFactory.CreateCharacter("Villager"));
+            // gameWorld.AddCharacter(npcFactory.CreateCharacter("Villager"));
+            
             foreach (var character in gameWorld.WorldCharacters)
             {
                 character.DisplayInfo();
@@ -52,72 +58,48 @@ namespace fantasyrpg_learning_project
 
             // Item creation examples
             ItemFacotry commonItemFactory = new CommonItemFactory();
-            /*
-            Weapon commonWeapon = commonItemFactory.CreateWeapon();
-
-            commonWeapon.DisplayInfo();
-
-            ItemFacotry legendaryItemFactory = new LegendaryItemFactory();
-
-            Weapon legendaryWeapon = legendaryItemFactory.CreateWeapon();
-
-            legendaryWeapon.DisplayInfo();
-            */
-
-            Weapon commonWeapon = commonItemFactory.CreateWeapon();
-            DefensiveItem commonArmor = commonItemFactory.CreateDefensiveItem();
-            UtilityItem commonPotion = commonItemFactory.CreateUtilityItem();
+            
+            // Weapon commonWeapon = commonItemFactory.CreateWeapon();
+            // DefensiveItem commonArmor = commonItemFactory.CreateDefensiveItem();
+            // UtilityItem commonPotion = commonItemFactory.CreateUtilityItem();
 
 
             // Get conan the warrior
             Character conan = gameWorld.WorldCharacters.First(character => character.Name == "Conan");
 
             // Add items to character's inventory
-            conan.Inventory.AddItem(commonWeapon);
-            conan.Inventory.AddItem(commonArmor);
-            conan.Inventory.AddItem(commonPotion);
+            // conan.Inventory.AddItem(commonWeapon);
+            // conan.Inventory.AddItem(commonArmor);
+            // conan.Inventory.AddItem(commonPotion);
+            
+            conan.Inventory.AddItem(items[0]);
+            conan.Inventory.AddItem(items[1]);
+            conan.Inventory.AddItem(items[2]);
 
             // List inventory items
             conan.Inventory.ListItems();
 
             // Equip items
-            conan.EquipItem(commonWeapon);
-            conan.EquipItem(commonArmor);
-            conan.EquipItem(commonPotion);
+            // conan.EquipItem(commonWeapon);
+            // conan.EquipItem(commonArmor);
+            // conan.EquipItem(commonPotion);
+            
+            conan.EquipItem(items[0]);
+            conan.EquipItem(items[1]);
+            conan.EquipItem(items[2]);
 
             // Show currently equipped items
             conan.ShowEquipment();
-
-            // Character actions
-            /*
-            conan.PerformAction();
-
-            // Set conan state to action
-            conan.SetState(new ActionState(new AttackAction()));
-
-            // Perform an action using the default melee attack
-            conan.PerformAction();
-
-            // Set conant into defending state
-            conan.SetState(new DefendingState());
-            conan.PerformAction();
-            */
-
+            List<Character> characters = gameWorld.GetCharacters();
+            // Console.WriteLine("Character`s 1 items: {0}", characters[0].Inventory.ListItems().Count);
+            // characters[0].ShowEquipment();
+            
             // Enemy creation
             EnemyManager enemyManager = new EnemyManager();
 
             Enemy slime = enemyManager.SpawnEnemy("Slime", 1);
             slime.DisplayInfo();
-            /*
-            Enemy goblin = enemyManager.SpawnEnemy("Goblin", 2);
-            goblin.DisplayInfo();
-
-            Enemy dragon = enemyManager.SpawnEnemy("Dragon", 5);
-            dragon.DisplayInfo();
-            dragon.PerformAction();
-            dragon.SetAction(new MovementAction());
-            dragon.PerformAction();
-            */
+            
             /*
             QuestManager questManager = new QuestManager();
 
@@ -139,17 +121,15 @@ namespace fantasyrpg_learning_project
             GameController controller = new GameController(conan, slime);
 
             Console.WriteLine("Press 'A' to Attack, 'D' to Defend, 'H' to Heal, 'M' to Move, 'S' to change state. Press 'Q' to quit.");
-            
-            DatabaseManager databaseManager = new DatabaseManager();
-            
-            databaseManager.SaveItems(new List<Item>{commonWeapon, commonArmor, commonPotion});
-            
-            // Example how to define custom key mappings
-            /*
-            var x = Console.ReadKey();
-            controller.SetKeyMapping(x.Key, new MoveCommand(conan));
-            */
 
+            databaseManager.SaveItems(new List<Item>{items[0], items[1], items[2]});
+            List<string> listOfClasses = new List<string>();
+            foreach (var character in characters)
+            {
+                listOfClasses.Add(character.GetClassName());
+            }
+            databaseManager.SaveCharacters(characters, listOfClasses);
+            
             while (true)
             {
                 // Capture keyboard input

@@ -24,7 +24,7 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
         private ICharacterState _currentState;
         private IActionStrategy _currentAction;
 
-        protected Character(string name, int health, int mana, int strength, int agility)
+        public Character(string name, int health, int mana, int strength, int agility)
         {
             Id = nextId++;
             Name = name;
@@ -40,7 +40,7 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
         }
 
         public abstract void DisplayInfo();
-
+        public abstract string GetClassName();
 
         public void SetAction(IActionStrategy actionStrategy)
         {
@@ -132,10 +132,10 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
 
         public void ShowEquipment()
         {
-            Console.WriteLine($"{Name}'s Equipment:");
-            Console.WriteLine($"- Weapon Slot: {_weaponSlot?.Name ?? "Empty"}");
-            Console.WriteLine($"- Defensive Slot: {_defensiveSlot?.Name ?? "Empty"}");
-            Console.WriteLine($"- Utility Slot: {_utilitySlot?.Name ?? "Empty"}");
+            // List<Item> equipedItems = new List<Item>();
+            // equipedItems.Add(_weaponSlot);
+            // equipedItems.Add(_defensiveSlot);
+            // equipedItems.Add(_utilitySlot);
         }
     }
 }

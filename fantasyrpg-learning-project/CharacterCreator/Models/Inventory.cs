@@ -25,13 +25,9 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
             }
         }
 
-        public void ListItems()
+        public List<Item> ListItems()
         {
-            Console.WriteLine("Inventory items:");
-            foreach (var item in _items)
-            {
-                Console.WriteLine($"- {item.Name} ({item.ItemType})");
-            }
+            return _items;
         }
 
         public bool Contains(Item item) => _items.Contains(item);
