@@ -1,6 +1,7 @@
 using fantasyrpg_learning_project.CharacterCreator;
 using fantasyrpg_learning_project.CharacterCreator.Models;
 using fantasyrpg_learning_project.GameWorldCreator.Models;
+using fantasyrpg_learning_project.ItemCreator;
 using fantasyrpg_learning_project.ItemCreator.Models;
 using Newtonsoft.Json;
 
@@ -138,10 +139,8 @@ public class DatabaseManager
         }
     }
     
-    public List<Character> LoadCharacters()
+    public void LoadCharacters()
     {
-        List<Character> characters = new List<Character>();
-
         using (var conn = new NpgsqlConnection(ConnectionString))
         {
             conn.Open();
@@ -182,10 +181,7 @@ public class DatabaseManager
                     }
                 }
             }
-
             conn.Close();
         }
-
-        return characters;
     }
 }

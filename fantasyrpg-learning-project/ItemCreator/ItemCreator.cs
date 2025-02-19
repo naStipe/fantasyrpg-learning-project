@@ -4,115 +4,85 @@ namespace fantasyrpg_learning_project.ItemCreator
 {
     public abstract class ItemFacotry
     {
-        public abstract Weapon CreateWeapon();
-        public abstract UtilityItem CreateUtilityItem();
-        public abstract DefensiveItem CreateDefensiveItem();
+        public abstract Weapon CreateWeapon(string name, string description, WeaponTypeEnum weaponTypeEnum, int value);
+        public abstract UtilityItem CreateUtilityItem(string name, string description, int value);
+        public abstract DefensiveItem CreateDefensiveItem(string name, string description, int value);
         
-    }
-
-    public class ItemFromDatabaseFactory : ItemFacotry
-    {
-
-        public Weapon CreateWeaponFromDatabase(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value)
-        {
-            return new Weapon(name, description, rarity, type, value);
-        }
-
-        public UtilityItem CreateUtilityItemFromDatabase(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value)
-        {
-            return new UtilityItem("Healing potion", "Basic healing potion", RarityEnum.Common, 20);
-        }
-
-        public DefensiveItem CreateDefensiveItemFromDatabase(string name, string description, RarityEnum rarity, WeaponTypeEnum type, int value)
-        {
-            return new DefensiveItem("Body armor", "Leather armor", RarityEnum.Common, 50);
-        }
-
-        public override Weapon CreateWeapon()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override UtilityItem CreateUtilityItem()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override DefensiveItem CreateDefensiveItem()
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class CommonItemFactory : ItemFacotry
     {
-        public override Weapon CreateWeapon()
+        public override Weapon CreateWeapon(string name, string description, WeaponTypeEnum weaponTypeEnum, int value)
         {
-            return new Weapon("Sword", "Basic sword", RarityEnum.Common, WeaponTypeEnum.Melee, 100);
+            return new Weapon(name, description, RarityEnum.Common, weaponTypeEnum, value);
         }
 
-        public override UtilityItem CreateUtilityItem()
+        public override UtilityItem CreateUtilityItem(string name, string description, int value)
         {
-            return new UtilityItem("Healing potion", "Basic healing potion", RarityEnum.Common, 20);
+            return new UtilityItem(name, description, RarityEnum.Common, value);
         }
+        
 
-        public override DefensiveItem CreateDefensiveItem()
+        public override DefensiveItem CreateDefensiveItem(string name, string description, int value)
         {
-            return new DefensiveItem("Body armor", "Leather armor", RarityEnum.Common, 50);
+            return new DefensiveItem(name, description, RarityEnum.Common, value);
         }
     }
 
     public class MagicItemFactory : ItemFacotry
     {
-        public override Weapon CreateWeapon()
+        public override Weapon CreateWeapon(string name, string description, WeaponTypeEnum weaponTypeEnum, int value)
         {
-            return new Weapon("Elfwood staff", "Magical staff", RarityEnum.Magic, WeaponTypeEnum.Ranged, 150);
+            return new Weapon(name, description, RarityEnum.Magic, weaponTypeEnum, value);
         }
 
-        public override UtilityItem CreateUtilityItem()
+        public override UtilityItem CreateUtilityItem(string name, string description, int value)
         {
-            throw new NotImplementedException();
+            return new UtilityItem(name, description, RarityEnum.Magic, value);
         }
+        
 
-        public override DefensiveItem CreateDefensiveItem()
+        public override DefensiveItem CreateDefensiveItem(string name, string description, int value)
         {
-            throw new NotImplementedException();
+            return new DefensiveItem(name, description, RarityEnum.Magic, value);
         }
     }
 
     public class RareItemFactory : ItemFacotry
     {
-        public override Weapon CreateWeapon()
+        public override Weapon CreateWeapon(string name, string description, WeaponTypeEnum weaponTypeEnum, int value)
         {
-            return new Weapon("Golden bow", "Rare bow", RarityEnum.Rare, WeaponTypeEnum.Ranged, 200);
+            return new Weapon(name, description, RarityEnum.Rare, weaponTypeEnum, value);
         }
 
-        public override UtilityItem CreateUtilityItem()
+        public override UtilityItem CreateUtilityItem(string name, string description, int value)
         {
-            throw new NotImplementedException();
+            return new UtilityItem(name, description, RarityEnum.Rare, value);
         }
+        
 
-        public override DefensiveItem CreateDefensiveItem()
+        public override DefensiveItem CreateDefensiveItem(string name, string description, int value)
         {
-            throw new NotImplementedException();
+            return new DefensiveItem(name, description, RarityEnum.Rare, value);
         }
     }
 
     public class LegendaryItemFactory : ItemFacotry
     {
-        public override Weapon CreateWeapon()
+        public override Weapon CreateWeapon(string name, string description, WeaponTypeEnum weaponTypeEnum, int value)
         {
-            return new Weapon("Punching gloves of the northern star", "Legendary gloves", RarityEnum.Legendary, WeaponTypeEnum.Melee, 9001);
+            return new Weapon(name, description, RarityEnum.Legendary, weaponTypeEnum, value);
         }
 
-        public override UtilityItem CreateUtilityItem()
+        public override UtilityItem CreateUtilityItem(string name, string description, int value)
         {
-            throw new NotImplementedException();
+            return new UtilityItem(name, description, RarityEnum.Legendary, value);
         }
+        
 
-        public override DefensiveItem CreateDefensiveItem()
+        public override DefensiveItem CreateDefensiveItem(string name, string description, int value)
         {
-            throw new NotImplementedException();
+            return new DefensiveItem(name, description, RarityEnum.Legendary, value);
         }
     }
 }

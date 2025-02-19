@@ -14,7 +14,7 @@ namespace fantasyrpg_learning_project
         {
             
             DatabaseManager databaseManager = new DatabaseManager();
-            List<Item> items = databaseManager.LoadItems().ToList();
+            List<Item> items = databaseManager.LoadItems();
             // Initialize the game world instace
             var gameWorld = GameWorld.Instance;
 
@@ -31,22 +31,22 @@ namespace fantasyrpg_learning_project
             // Generate the world map
             gameWorld.InitializeWorld(10, 10, biomes);
             databaseManager.LoadCharacters();
-            if (gameWorld.WorldCharacters.Count == 0)
-            {
-                // Create characters using the factory pattern
-                CharacterFactory warriorFactory = new WarriorFactory();
-                CharacterFactory mageFactory = new MageFactory();
-                CharacterFactory archerFactory = new ArcherFactory();
-
-                // Display character information
-                gameWorld.AddCharacter(warriorFactory.CreateCharacter("Conan"));
-                gameWorld.AddCharacter(mageFactory.CreateCharacter("Merlin"));
-                gameWorld.AddCharacter(archerFactory.CreateCharacter("Legolas"));
-            }
+            // if (gameWorld.WorldCharacters.Count == 0)
+            // {
+            //     // Create characters using the factory pattern
+            //     CharacterFactory warriorFactory = new WarriorFactory();
+            //     CharacterFactory mageFactory = new MageFactory();
+            //     CharacterFactory archerFactory = new ArcherFactory();
+            //
+            //     // Display character information
+            //     gameWorld.AddCharacter(warriorFactory.CreateCharacter("Conan"));
+            //     gameWorld.AddCharacter(mageFactory.CreateCharacter("Merlin"));
+            //     gameWorld.AddCharacter(archerFactory.CreateCharacter("Legolas"));
+            // }
             
             // Add NPCs to the game world
             // TODO: Extend NPC class -> Jobs, Skills, Inventory, Roles
-            NpcFactory npcFactory = new NpcFactory();
+            // NpcFactory npcFactory = new NpcFactory();
 
             // gameWorld.AddCharacter(npcFactory.CreateCharacter("Villager"));
             // gameWorld.AddCharacter(npcFactory.CreateCharacter("Villager"));
@@ -72,9 +72,9 @@ namespace fantasyrpg_learning_project
             // conan.Inventory.AddItem(commonArmor);
             // conan.Inventory.AddItem(commonPotion);
             
-            conan.Inventory.AddItem(items[0]);
-            conan.Inventory.AddItem(items[1]);
-            conan.Inventory.AddItem(items[2]);
+            // conan.Inventory.AddItem(items[0]);
+            // conan.Inventory.AddItem(items[1]);
+            // conan.Inventory.AddItem(items[2]);
 
             // List inventory items
             conan.Inventory.ListItems();
@@ -84,9 +84,9 @@ namespace fantasyrpg_learning_project
             // conan.EquipItem(commonArmor);
             // conan.EquipItem(commonPotion);
             
-            conan.EquipItem(items[0]);
-            conan.EquipItem(items[1]);
-            conan.EquipItem(items[2]);
+            // conan.EquipItem(items[0]);
+            // conan.EquipItem(items[1]);
+            // conan.EquipItem(items[2]);
 
             // Show currently equipped items
             conan.ShowEquipment();
@@ -122,7 +122,7 @@ namespace fantasyrpg_learning_project
 
             Console.WriteLine("Press 'A' to Attack, 'D' to Defend, 'H' to Heal, 'M' to Move, 'S' to change state. Press 'Q' to quit.");
 
-            databaseManager.SaveItems(new List<Item>{items[0], items[1], items[2]});
+            databaseManager.SaveItems(items);
             List<string> listOfClasses = new List<string>();
             foreach (var character in characters)
             {

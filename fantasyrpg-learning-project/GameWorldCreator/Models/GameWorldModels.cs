@@ -48,7 +48,7 @@ namespace fantasyrpg_learning_project.GameWorldCreator.Models
             WorldMap = GameWorldGenerator.GenerateWorldMap(width, height, biomes);
         }
 
-        // Add an character to the world
+        // Add a character to the world
         public void AddCharacter(Character character)
         {
             WorldCharacters.Add(character);
