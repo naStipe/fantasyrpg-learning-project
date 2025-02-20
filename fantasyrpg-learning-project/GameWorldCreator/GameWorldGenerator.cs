@@ -28,8 +28,31 @@ namespace fantasyrpg_learning_project.GameWorldCreator
 
             return worldMap;
         }
+        
+        public static WorldMap GenerateWorldMapFromDatabase(int width, int height, string[] mapData)
+        {
+            // Create a new WorldMap instance
+            WorldMap worldMap = new WorldMap(width, height);
 
-        // TODO: Could enhance Biome generation -> e.g. certain biomes can't be connected to each other
+            // Ensure mapData[0] contains dimensions and actual map data starts from index 1
+            for (int y = 0; y < height; y++)
+            {
+                string[] rowTiles = mapData[y + 1].Split(','); // Extract row data
+
+                for (int x = 0; x < width; x++)
+                {
+                    string[] tileData = rowTiles[x].Split(':'); // Example: "Forest:5"
+                    string biomeName = tileData[0];
+                    int elevation = int.Parse(tileData[1]);
+
+                    // Assign tile to the world map
+                    worldMap.Map[x, y] = new Tile(biomeName, elevation);
+                }
+            }
+
+            return worldMap;
+        }
+        
         private static Biome SelectBiome(List<Biome> biomes, int elevation)
         {
             foreach (var biome in biomes)

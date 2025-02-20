@@ -130,12 +130,11 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
             }
         }
 
-        public void ShowEquipment()
+        public List<Item> GetEquipemt()
         {
-            // List<Item> equipedItems = new List<Item>();
-            // equipedItems.Add(_weaponSlot);
-            // equipedItems.Add(_defensiveSlot);
-            // equipedItems.Add(_utilitySlot);
+            List<Item> items = new List<Item>{_weaponSlot, _defensiveSlot, _utilitySlot};
+            return items;
         }
+        
     }
 }

@@ -19,6 +19,11 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
         {
             return "Enemy";
         }
+
+        public Dictionary<string, int> GetNameAndRank()
+        {
+            return new Dictionary<string, int>{{Name, Rank}};
+        }
     }
 
 

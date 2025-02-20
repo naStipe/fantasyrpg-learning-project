@@ -48,10 +48,40 @@ namespace fantasyrpg_learning_project.GameWorldCreator.Models
             WorldMap = GameWorldGenerator.GenerateWorldMap(width, height, biomes);
         }
 
+        public void InitializeWorldFromDatabase(int width, int height, string[] mapData)
+        {
+            WorldMap = GameWorldGenerator.GenerateWorldMapFromDatabase(width, height, mapData);
+        }
+
         // Add a character to the world
         public void AddCharacter(Character character)
         {
             WorldCharacters.Add(character);
+        }
+        
+        public string[] SaveMapToStringArray()
+        {
+            if (WorldMap == null)
+                return new string[0]; // Return an empty array if the map is not initialized
+
+            string[] mapData = new string[WorldMap.Height + 1]; // +1 for storing width & height
+
+            // First element stores the dimensions: "Width:Height"
+            mapData[0] = $"{WorldMap.Width}:{WorldMap.Height}";
+
+            for (int y = 0; y < WorldMap.Height; y++)
+            {
+                List<string> rowTiles = new List<string>();
+
+                for (int x = 0; x < WorldMap.Width; x++)
+                {
+                    Tile tile = WorldMap.Map[x, y];
+                    rowTiles.Add($"{tile.Biome}:{tile.Elevation}"); // Example: "Forest:5"
+                }
+
+                mapData[y + 1] = string.Join(",", rowTiles); // Join row elements into a single string
+            }
+            return mapData;
         }
     }
 
@@ -60,9 +90,7 @@ namespace fantasyrpg_learning_project.GameWorldCreator.Models
     {
         public string Biome { get; set; }
         public int Elevation { get; set; }
-
-        // TODO: Add support for locations (towns, dungeons) -> events??
-
+        
         public Tile(string biome, int elevation)
         {
             Biome = biome;

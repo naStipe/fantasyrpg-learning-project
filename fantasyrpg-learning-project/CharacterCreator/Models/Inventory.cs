@@ -25,7 +25,7 @@ namespace fantasyrpg_learning_project.CharacterCreator.Models
             }
         }
 
-        public List<Item> ListItems()
+        public List<Item> GetItems()
         {
             return _items;
         }
