@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fantasyrpg-learning-project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b3cb3a2b887102fcad397644f86246cfcbc3417")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb3ec5271d49445660c5e2be5b1ac94c0fd9d6a7")]
 [assembly: System.Reflection.AssemblyProductAttribute("fantasyrpg-learning-project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fantasyrpg-learning-project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

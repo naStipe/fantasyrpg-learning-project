@@ -405,8 +405,8 @@ public class DatabaseManager
         // Returning a list of enemies for the database
         return enemies;
     }
+    
     // Function to save biomes to the database
-
     public void SaveBiomes(List<Biome> biomes)
     {
         using (var conn = new NpgsqlConnection(ConnectionString))
@@ -464,6 +464,7 @@ public class DatabaseManager
         return biomes;
     }
     
+    // Fucntion to save the world map to the database
     public void SaveWorldMap()
     {
         using (var conn = new NpgsqlConnection(ConnectionString))
@@ -497,6 +498,8 @@ public class DatabaseManager
             conn.Close();
         }
     }
+    
+    // Function to retrieve the world map from the database
     public (int width, int height, string[] mapData) LoadWorldMap()
     {
         using (var conn = new NpgsqlConnection(ConnectionString))
